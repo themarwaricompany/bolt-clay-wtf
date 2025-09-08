@@ -2,6 +2,7 @@ import React from 'react';
 import { LogOut, User, FileText } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { signOut } from '../lib/auth';
+import { useNavigate } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,9 +11,11 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, showHeader = true }) => {
   const { user, profile } = useAuth();
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await signOut();
+    navigate('/login');
   };
 
   return (
