@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, Chrome } from 'lucide-react';
 import { signIn, signInWithGoogle } from '../../lib/auth';
 
@@ -11,6 +11,7 @@ const SignInForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +22,8 @@ const SignInForm: React.FC = () => {
 
     if (error) {
       setError(error.message);
+    } else {
+      navigate('/dashboard');
     }
 
     setLoading(false);
