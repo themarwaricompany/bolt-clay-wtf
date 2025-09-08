@@ -6,7 +6,7 @@ export interface CreateReportData {
 }
 
 // Mock n8n.io webhook URLs - replace with actual URLs
-const N8N_WEBHOOK_URL = 'https://your-n8n-instance.com/webhook/linkedin-analysis';
+const N8N_WEBHOOK_URL = 'https://n8n.ruskmedia.in/webhook-test/fc8b24f1-b5fb-4cea-8f4b-6268f6c40386';
 const N8N_RESULTS_URL = 'https://your-n8n-instance.com/webhook/get-results';
 
 export const createReport = async (userId: string, linkedinUrl: string) => {
