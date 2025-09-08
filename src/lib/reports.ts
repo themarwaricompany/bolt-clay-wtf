@@ -28,7 +28,7 @@ export const createReport = async (userId: string, linkedinUrl: string) => {
   // Trigger n8n.io workflow
   try {
     const response = await fetch(N8N_WEBHOOK_URL, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
