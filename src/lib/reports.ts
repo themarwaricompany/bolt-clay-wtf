@@ -25,28 +25,15 @@ export const createReport = async (userId: string, linkedinUrl: string) => {
     return { report: null, error: dbError };
   }
 
-  // Get user profile for email
-  const { data: profile, error: profileError } = await supabase
-    .from('profiles')
-    .select('email')
-    .eq('id', userId)
-    .single();
-
-  if (profileError) {
-    return { report: null, error: profileError };
-  }
-
   // Trigger n8n.io workflow
   try {
     const response = await fetch(N8N_WEBHOOK_URL, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        linkedin_url: linkedinUrl,
-        user_email: profile.email,
-        report_id: report.id,
+        "LinkedIn Profile URL": linkedinUrl,
       }),
     });
 
