@@ -44,7 +44,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const refreshProfile = async () => {
+  const refreshProfile = async (user: User | null) => {
     if (user) {
       const { data } = await getProfile(user.id);
       setProfile(data);
@@ -56,7 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       if (session?.user) {
-        refreshProfile();
+        refreshProfile(session.user);
       }
       setLoading(false);
     });
@@ -67,7 +67,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
-        await refreshProfile();
+        await refreshProfile(session.user);
       } else {
         setProfile(null);
       }
@@ -75,13 +75,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
 
     return () => subscription.unsubscribe();
-  }, [user]);
+  }, []);
 
   const value = {
     user,
     profile,
     loading,
-    refreshProfile,
+    refreshProfile: () => refreshProfile(user),
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
