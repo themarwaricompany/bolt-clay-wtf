@@ -38,10 +38,14 @@ export const createReport = async (userId: string, linkedinUrl: string) => {
 
   // Trigger n8n.io workflow
   try {
-    const params = new URLSearchParams();
-    params.set('LinkedIn Profile URL', linkedinUrl);
-    const response = await fetch(`${N8N_WEBHOOK_URL}?${params.toString()}`, {
-      method: 'GET',
+    const response = await fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "LinkedIn Profile URL": linkedinUrl,
+      }),
     });
 
     if (!response.ok) {
@@ -60,9 +64,9 @@ export const createReport = async (userId: string, linkedinUrl: string) => {
   }
 };
 
-export const pollReportStatus = async (reportId: string): Promise<{ 
-  status: 'processing' | 'completed' | 'error'; 
-  googleSheetUrl?: string 
+export const pollReportStatus = async (reportId: string): Promise<{
+  status: 'processing' | 'completed' | 'error';
+  googleSheetUrl?: string
 }> => {
   try {
     // Check database first
@@ -89,10 +93,10 @@ export const pollReportStatus = async (reportId: string): Promise<{
 
     // Poll n8n.io for results
     const response = await fetch(`${N8N_RESULTS_URL}?report_id=${reportId}`);
-    
+
     if (response.ok) {
       const data = await response.json();
-      
+
       if (data.status === 'completed' && data.google_sheet_url) {
         // Update database with results
         await supabase
@@ -115,7 +119,7 @@ export const pollReportStatus = async (reportId: string): Promise<{
           .from('reports')
           .update({ status: 'error' })
           .eq('id', reportId);
-        
+
         return { status: 'error' };
       }
     }
