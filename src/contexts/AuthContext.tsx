@@ -55,14 +55,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     setLoading(true);
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        const { data: profileData } = await getProfile(session.user.id);
-        setProfile(profileData);
-      } else {
+      try {
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          const { data: profileData } = await getProfile(session.user.id);
+          setProfile(profileData);
+        } else {
+          setProfile(null);
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
         setProfile(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => {
