@@ -8,6 +8,7 @@ import ForgotPasswordForm from './components/auth/ForgotPasswordForm';
 import OnboardingScreen from './components/OnboardingScreen';
 import Dashboard from './components/Dashboard';
 import ReportPage from './components/ReportPage';
+import ResetPasswordForm from './components/auth/ResetPasswordForm';
 import Home from './components/Home'; // Import the new Home component
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<SignInForm />} />
           <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+          <Route path="/reset-password" element={<ResetPasswordForm />} />
           <Route path="/onboarding" element={<OnboardingScreen />} />
           <Route
             path="/dashboard"

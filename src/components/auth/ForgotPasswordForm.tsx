@@ -45,7 +45,7 @@ const ForgotPasswordForm: React.FC = () => {
           <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
             <div className="bg-green-50 border border-green-200 rounded-lg p-4">
               <p className="text-green-700 text-sm">
-                Password reset instructions have been sent to your email address.
+                Password reset instructions have been sent to your email address. Click the link in your email to reset your password.
               </p>
             </div>
 
