@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import SignUpForm from './components/auth/SignUpForm';
@@ -8,6 +8,7 @@ import ForgotPasswordForm from './components/auth/ForgotPasswordForm';
 import OnboardingScreen from './components/OnboardingScreen';
 import Dashboard from './components/Dashboard';
 import ReportPage from './components/ReportPage';
+import Home from './components/Home'; // Import the new Home component
 
 function App() {
   return (
@@ -34,7 +35,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </AuthProvider>
