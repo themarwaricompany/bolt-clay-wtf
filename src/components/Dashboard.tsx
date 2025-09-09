@@ -44,18 +44,18 @@ const Dashboard: React.FC = () => {
   const features = [
     {
       icon: <Users className="w-8 h-8 text-cyan-600" />,
-      title: "Engagement Analytics",
-      description: "Discover who's engaging with your LinkedIn content"
+      title: "Competitor Engagement",
+      description: "Discover who's engaging with your competitor's LinkedIn content"
     },
     {
       icon: <TrendingUp className="w-8 h-8 text-blue-600" />,
-      title: "Growth Insights",
-      description: "Track your profile's performance over the last 30 days"
+      title: "Audience Insights",
+      description: "Analyze your competitor's audience and engagement patterns over the last 30 days"
     },
     {
       icon: <BarChart3 className="w-8 h-8 text-purple-600" />,
       title: "Detailed Reports",
-      description: "Get comprehensive Google Sheets with all engagement data"
+      description: "Get comprehensive Google Sheets with all competitor engagement data and audience insights"
     }
   ];
 
@@ -64,10 +64,10 @@ const Dashboard: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            LinkedIn Social Listening Tool
+            Competitor LinkedIn Analysis
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Analyze engagement on any public LinkedIn profile and discover who's interacting with their content.
+            Track your competitors' LinkedIn engagement and discover who's interacting with their content. Get detailed insights into their audience and engagement patterns.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ const Dashboard: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="linkedin-url" className="block text-lg font-semibold text-gray-900 mb-3">
-                Enter LinkedIn Profile URL
+                Enter Competitor's LinkedIn Profile URL
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -95,14 +95,14 @@ const Dashboard: React.FC = () => {
                       ? 'border-red-300 focus:border-red-500' 
                       : 'border-gray-300 focus:border-cyan-500'
                   }`}
-                  placeholder="https://www.linkedin.com/in/username"
+                  placeholder="https://www.linkedin.com/in/competitor-username"
                 />
               </div>
               {urlError && (
                 <p className="mt-2 text-red-600 text-sm">{urlError}</p>
               )}
               <p className="mt-2 text-gray-500 text-sm">
-                Example: https://www.linkedin.com/in/john-doe
+                Enter the LinkedIn profile URL of the competitor you want to analyze. Example: https://www.linkedin.com/in/competitor-name
               </p>
             </div>
 
@@ -116,7 +116,7 @@ const Dashboard: React.FC = () => {
               ) : (
                 <>
                   <Send className="w-5 h-5" />
-                  <span>Generate Report</span>
+                  <span>Analyze Competitor</span>
                 </>
               )}
             </button>

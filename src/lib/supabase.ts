@@ -19,6 +19,7 @@ export type Database = {
           email: string;
           first_name: string | null;
           last_name: string | null;
+          linkedin_profile_url: string | null;
           has_completed_onboarding: boolean;
           created_at: string;
           updated_at: string;
@@ -28,6 +29,7 @@ export type Database = {
           email: string;
           first_name?: string | null;
           last_name?: string | null;
+          linkedin_profile_url?: string | null;
           has_completed_onboarding?: boolean;
           created_at?: string;
           updated_at?: string;
@@ -37,6 +39,7 @@ export type Database = {
           email?: string;
           first_name?: string | null;
           last_name?: string | null;
+          linkedin_profile_url?: string | null;
           has_completed_onboarding?: boolean;
           created_at?: string;
           updated_at?: string;

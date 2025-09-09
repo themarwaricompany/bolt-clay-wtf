@@ -91,16 +91,16 @@ const ReportPage: React.FC = () => {
               </div>
               
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                Analyzing Profile...
+                Analyzing Competitor Profile...
               </h1>
               
               <p className="text-lg text-gray-600 mb-8">
-                Your report is being generated and will appear here shortly.
+                Your competitor analysis report is being generated and will appear here shortly.
               </p>
               
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
                 <p className="text-blue-700 text-sm">
-                  This process typically takes 1-2 minutes. We're analyzing the last 30 days of engagement data.
+                  This process typically takes 1-2 minutes. We're analyzing the last 30 days of your competitor's engagement data.
                 </p>
               </div>
             </>
@@ -115,11 +115,11 @@ const ReportPage: React.FC = () => {
               </div>
               
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                Success! Your report is ready.
+                Success! Your competitor analysis is ready.
               </h1>
               
               <p className="text-lg text-gray-600 mb-8">
-                Your LinkedIn engagement analysis has been completed and saved to a Google Sheet.
+                Your competitor's LinkedIn engagement analysis has been completed and saved to a Google Sheet.
               </p>
               
               <button
@@ -133,7 +133,7 @@ const ReportPage: React.FC = () => {
               
               <div className="bg-green-50 border border-green-200 rounded-xl p-6 mt-8">
                 <p className="text-green-700 text-sm">
-                  Your report includes engagement data from the last 30 days, including names, LinkedIn profiles, and headlines of users who interacted with the content.
+                  Your report includes competitor engagement data from the last 30 days, including names, LinkedIn profiles, and headlines of users who interacted with their content.
                 </p>
               </div>
             </>
@@ -153,7 +153,7 @@ const ReportPage: React.FC = () => {
               
               <p className="text-lg text-gray-600 mb-8">
                 {timeoutReached 
-                  ? "Sorry, something went wrong while generating your report. Please try again."
+                  ? "Sorry, something went wrong while generating your competitor analysis. Please try again."
                   : "We encountered an error while processing your request."
                 }
               </p>
@@ -167,7 +167,7 @@ const ReportPage: React.FC = () => {
               
               <div className="bg-red-50 border border-red-200 rounded-xl p-6 mt-8">
                 <p className="text-red-700 text-sm">
-                  If this problem persists, please ensure the LinkedIn profile URL is public and accessible.
+                  If this problem persists, please ensure the competitor's LinkedIn profile URL is public and accessible.
                 </p>
               </div>
             </>
