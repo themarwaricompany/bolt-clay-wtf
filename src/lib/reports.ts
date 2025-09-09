@@ -38,15 +38,12 @@ export const createReport = async (userId: string, linkedinUrl: string) => {
 
   // Trigger n8n.io workflow
   try {
-    const response = await fetch(N8N_WEBHOOK_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "LinkedIn Profile URL": linkedinUrl,
-      }),
+    const params = new URLSearchParams();
+    params.set('LinkedIn Profile URL', linkedinUrl);
+    const response = await fetch(`${N8N_WEBHOOK_URL}?${params.toString()}`, {
+      method: 'GET',
     });
+
 
     if (!response.ok) {
       throw new Error('Failed to trigger workflow');
