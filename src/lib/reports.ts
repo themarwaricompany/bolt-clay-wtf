@@ -5,9 +5,8 @@ export interface CreateReportData {
   userEmail: string;
 }
 
-// Mock n8n.io webhook URLs - replace with actual URLs
+// n8n.io webhook URL
 const N8N_WEBHOOK_URL = 'https://n8n.ruskmedia.in/webhook-test/fc8b24f1-b5fb-4cea-8f4b-6268f6c40386';
-const N8N_RESULTS_URL = 'https://n8n.ruskmedia.in/webhook-test/fc8b24f1-b5fb-4cea-8f4b-6268f6c40386';
 
 export const createReport = async (userId: string, linkedinUrl: string) => {
   // Insert report into database
@@ -38,15 +37,17 @@ export const createReport = async (userId: string, linkedinUrl: string) => {
 
   // Trigger n8n.io workflow
   try {
-    const params = new URLSearchParams();
-    params.set('LinkedIn Profile URL', linkedinUrl);
-    const response = await fetch(`${N8N_WEBHOOK_URL}?${params.toString()}`, {
+    const response = await fetch(`${N8N_WEBHOOK_URL}?linkedin_url=${encodeURIComponent(linkedinUrl)}&report_id=${report.id}&user_email=${encodeURIComponent(profile.email)}`, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
 
     if (!response.ok) {
-      throw new Error('Failed to trigger workflow');
+      console.error('Webhook response:', response.status, response.statusText);
+      throw new Error(`Failed to trigger workflow: ${response.status}`);
     }
 
     return { report, error: null };
@@ -88,38 +89,7 @@ export const pollReportStatus = async (reportId: string): Promise<{
       return { status: 'error' };
     }
 
-    // Poll n8n.io for results
-    const response = await fetch(`${N8N_RESULTS_URL}?report_id=${reportId}`);
-
-    if (response.ok) {
-      const data = await response.json();
-
-      if (data.status === 'completed' && data.google_sheet_url) {
-        // Update database with results
-        await supabase
-          .from('reports')
-          .update({
-            status: 'completed',
-            google_sheet_url: data.google_sheet_url,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', reportId);
-
-        return {
-          status: 'completed',
-          googleSheetUrl: data.google_sheet_url,
-        };
-      }
-
-      if (data.status === 'error') {
-        await supabase
-          .from('reports')
-          .update({ status: 'error' })
-          .eq('id', reportId);
-
-        return { status: 'error' };
-      }
-    }
+    // Just return processing status - the webhook will update the database when complete
 
     return { status: 'processing' };
   } catch (error) {

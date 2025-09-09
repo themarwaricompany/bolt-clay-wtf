@@ -95,10 +95,10 @@ const OnboardingScreen: React.FC = () => {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Complete Your Profile
+            One Last Step
           </h1>
           <p className="text-gray-600">
-            We need your LinkedIn profile to get started
+            Please provide your LinkedIn profile URL to complete your setup
           </p>
         </div>
 
@@ -136,7 +136,7 @@ const OnboardingScreen: React.FC = () => {
                 />
               </div>
               <p className="mt-2 text-gray-500 text-sm">
-                This is required to set up your account and enable competitor tracking features.
+                This helps us personalize your experience and enables competitor analysis features.
               </p>
             </div>
 
@@ -149,7 +149,7 @@ const OnboardingScreen: React.FC = () => {
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
               ) : (
                 <>
-                  <span>Continue</span>
+                  <span>Complete Setup</span>
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}
